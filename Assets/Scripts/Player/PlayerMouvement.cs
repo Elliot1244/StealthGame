@@ -35,14 +35,10 @@ public class PlayerMouvement : MonoBehaviour
         _sprint.action.performed += SprintUpdate;
         _sprint.action.canceled += SprintCanceled;
 
-        //Action
-        _action.action.started += ActionStarted;
+
     }
 
-    private void ActionStarted(InputAction.CallbackContext obj)
-    {
-        Debug.Log("J'ai fait un truc !");
-    }
+
 
     private void SprintCanceled(InputAction.CallbackContext obj)
     {
