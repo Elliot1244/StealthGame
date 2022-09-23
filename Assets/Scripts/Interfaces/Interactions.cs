@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System;
 
 public class Interactions : MonoBehaviour
 {
     [SerializeField] Canvas _canva;
     [SerializeField] InputActionReference _action;
+    [SerializeField] PlayerMouvement _movement;
     bool _actionButtonPressd = false;
 
     private void Awake()
@@ -21,6 +23,11 @@ public class Interactions : MonoBehaviour
     private void ActionCanceled(InputAction.CallbackContext obj)
     {
         _actionButtonPressd = false;
+    }
+
+    internal void WaitClimbAnimationEnd()
+    {
+        _movement.Climb();
     }
 
     // Start is called before the first frame update
@@ -43,9 +50,9 @@ public class Interactions : MonoBehaviour
             if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactableObject))
             {
                 _canva.gameObject.SetActive(true);
-                if(hit.collider.TryGetComponent<IInteractable>(out IInteractable interactable) && _actionButtonPressd == true)
+                if(_actionButtonPressd == true)
                 {
-                    interactable.Use();
+                    interactableObject.Use(this);
                 }
             }
             else

@@ -5,6 +5,6 @@ using UnityEngine;
 public interface IInteractable
 {
     string GetName();
-    void Use();
+    void Use(Interactions master);
 
 }

@@ -7,6 +7,7 @@ public class WallEnterScript : MonoBehaviour, IInteractable
 {
     [SerializeField] Animator _animator;
 
+
     /*private void Start()
     {
         _animator = gameObject.GetComponent<Animator>();
@@ -16,9 +17,11 @@ public class WallEnterScript : MonoBehaviour, IInteractable
     {
         return "";
     }
-    public void Use()
+
+    public void Use(Interactions master)
     {
-        _animator.SetTrigger("canClimb");
+        master.WaitClimbAnimationEnd();
         Debug.Log("Je peux faire le mur");
     }
+
 }

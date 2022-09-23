@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,11 +20,28 @@ public class PlayerMouvement : MonoBehaviour
     Vector3 _currentMovement;
     bool _movementPressed;
     bool _isRunning;
+
+    bool _climbing;
+
     private void Reset()
     {
         _animator = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
     }
+
+    internal void Climb()
+    {
+        if (_climbing) return;
+
+        _climbing = true;
+        _animator.SetTrigger("canClimb");
+    }
+
+    internal void ClimbStop()
+    {
+        _climbing = false;
+    }
+
     private void Awake()
     {
         //Mouvement
