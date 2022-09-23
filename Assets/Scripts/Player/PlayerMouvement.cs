@@ -6,6 +6,7 @@ public class PlayerMouvement : MonoBehaviour
 {
     [SerializeField] InputActionReference _movement;
     [SerializeField] InputActionReference _sprint;
+    [SerializeField] InputActionReference _action;
     [SerializeField] Animator _animator;
     [SerializeField] CharacterController _controller;
     [SerializeField] Camera _camera;
@@ -33,6 +34,14 @@ public class PlayerMouvement : MonoBehaviour
         _sprint.action.started += SprintStarted;
         _sprint.action.performed += SprintUpdate;
         _sprint.action.canceled += SprintCanceled;
+
+        //Action
+        _action.action.started += ActionStarted;
+    }
+
+    private void ActionStarted(InputAction.CallbackContext obj)
+    {
+        Debug.Log("J'ai fait un truc !");
     }
 
     private void SprintCanceled(InputAction.CallbackContext obj)
@@ -49,7 +58,6 @@ public class PlayerMouvement : MonoBehaviour
     {
         _isRunning = true;
     }
-
 
     void Start()
     {
