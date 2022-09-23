@@ -29,12 +29,26 @@ public class PlayerMouvement : MonoBehaviour
         _controller = GetComponent<CharacterController>();
     }
 
+    [SerializeField] AnimationCurve _climbY;
     internal void Climb()
     {
         if (_climbing) return;
 
         _climbing = true;
         _animator.SetTrigger("canClimb");
+        StartCoroutine(ClimbMovement());
+        IEnumerator ClimbMovement()
+        {
+            var startPosition = _controller.transform.position;
+            float timer = 0;
+            while (timer < _climbY.keys[_climbY.keys.Length-1].time)
+            {
+                yield return null;
+                timer += Time.deltaTime;
+
+                _controller.transform.position = startPosition + new Vector3(0, _climbY.Evaluate(timer), 0);
+            }
+        }
     }
 
     internal void ClimbStop()
@@ -114,23 +128,27 @@ public class PlayerMouvement : MonoBehaviour
         realDirection = _camera.transform.TransformDirection(realDirection);
 
         // Rotation
-        transform.LookAt(transform.position + realDirection);
-        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+        _controller.transform.LookAt(_controller.transform.position + realDirection);
+        _controller.transform.rotation = Quaternion.Euler(0, _controller.transform.rotation.eulerAngles.y, 0);
 
 
         // Gravity
         _vSpeed -= _gravity * Time.deltaTime;
         realDirection.y = _vSpeed;
 
-        if (_isRunning)
+        if(!_climbing)
         {
-            _controller.Move(realDirection * _speed * Time.deltaTime * 2);
-            _isRunning = true;
-        }
-        else
-        {
-            _controller.Move(realDirection * _speed * Time.deltaTime);
-            _isRunning = false;
+            if (_isRunning)
+
+            {
+                _controller.Move(realDirection * _speed * Time.deltaTime * 2);
+                _isRunning = true;
+            }
+            else
+            {
+                _controller.Move(realDirection * _speed * Time.deltaTime);
+                _isRunning = false;
+            }
         }
     }
 
