@@ -5,12 +5,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMouvement : MonoBehaviour
 {
+    [SerializeField] float _waitBeforeFalling = 15f;
     [SerializeField] InputActionReference _movement;
     [SerializeField] InputActionReference _sprint;
     [SerializeField] InputActionReference _action;
     [SerializeField] Animator _animator;
     [SerializeField] CharacterController _controller;
     [SerializeField] Camera _camera;
+    [SerializeField] AnimationCurve _climbY;
+    [SerializeField] AnimationCurve _climbZ;
     [SerializeField] int _isWalkingAnim;
     [SerializeField] float _speed;
     [SerializeField] float _gravity;
@@ -29,13 +32,13 @@ public class PlayerMouvement : MonoBehaviour
         _controller = GetComponent<CharacterController>();
     }
 
-    [SerializeField] AnimationCurve _climbY;
     internal void Climb()
     {
         if (_climbing) return;
 
         _climbing = true;
         _animator.SetTrigger("canClimb");
+        
         StartCoroutine(ClimbMovement());
         IEnumerator ClimbMovement()
         {
@@ -46,8 +49,10 @@ public class PlayerMouvement : MonoBehaviour
                 yield return null;
                 timer += Time.deltaTime;
 
-                _controller.transform.position = startPosition + new Vector3(0, _climbY.Evaluate(timer), 0);
+                _controller.transform.position = startPosition + new Vector3(0, _climbY.Evaluate(timer), _climbZ.Evaluate(timer)); 
             }
+            new WaitForSeconds(_waitBeforeFalling);
+            _animator.SetTrigger("isFalling");
         }
     }
 
@@ -126,10 +131,13 @@ public class PlayerMouvement : MonoBehaviour
         // Camera
         var realDirection = new Vector3(_currentMovement.x, 0, _currentMovement.y);
         realDirection = _camera.transform.TransformDirection(realDirection);
-
-        // Rotation
-        _controller.transform.LookAt(_controller.transform.position + realDirection);
-        _controller.transform.rotation = Quaternion.Euler(0, _controller.transform.rotation.eulerAngles.y, 0);
+        if(!_climbing)
+        {
+            // Rotation
+            _controller.transform.LookAt(_controller.transform.position + realDirection);
+            _controller.transform.rotation = Quaternion.Euler(0, _controller.transform.rotation.eulerAngles.y, 0);
+        }
+       
 
 
         // Gravity

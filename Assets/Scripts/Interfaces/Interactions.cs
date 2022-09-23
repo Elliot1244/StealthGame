@@ -44,8 +44,8 @@ public class Interactions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward * 2, Color.yellow);
-        if (Physics.Raycast(transform.position, transform.forward, out var hit, 2f))
+        Debug.DrawRay(transform.position, transform.forward * 1, Color.yellow);
+        if (Physics.Raycast(transform.position, transform.forward, out var hit, 1f))
         {
             if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactableObject))
             {

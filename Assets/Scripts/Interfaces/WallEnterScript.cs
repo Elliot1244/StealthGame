@@ -7,11 +7,6 @@ public class WallEnterScript : MonoBehaviour, IInteractable
 {
     [SerializeField] Animator _animator;
 
-
-    /*private void Start()
-    {
-        _animator = gameObject.GetComponent<Animator>();
-    }*/
     // Start is called before the first frame update
     public string GetName()
     {
