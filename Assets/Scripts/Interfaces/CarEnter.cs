@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CarEnter : MonoBehaviour, IInteractable
 {
+    public bool IsInteractable => true;
+
     // Start is called before the first frame update
     public string GetName()
     {

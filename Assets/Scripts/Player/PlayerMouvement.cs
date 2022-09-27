@@ -25,6 +25,7 @@ public class PlayerMouvement : MonoBehaviour
     bool _isRunning;
 
     bool _climbing;
+    bool _isOpeningDoor;
 
     private void Reset()
     {
@@ -59,6 +60,19 @@ public class PlayerMouvement : MonoBehaviour
     internal void ClimbStop()
     {
         _climbing = false;
+    }
+
+    internal void OpenDoor()
+    {
+        if(_isOpeningDoor) return;
+
+        _isOpeningDoor = true;
+        _animator.SetTrigger("canOpenDoor");
+    }
+
+    internal void OpenDoorStop()
+    {
+        _isOpeningDoor = false;
     }
 
     private void Awake()
@@ -131,7 +145,7 @@ public class PlayerMouvement : MonoBehaviour
         // Camera
         var realDirection = new Vector3(_currentMovement.x, 0, _currentMovement.y);
         realDirection = _camera.transform.TransformDirection(realDirection);
-        if(!_climbing)
+        if(!_climbing || _isOpeningDoor)
         {
             // Rotation
             _controller.transform.LookAt(_controller.transform.position + realDirection);
@@ -144,7 +158,7 @@ public class PlayerMouvement : MonoBehaviour
         _vSpeed -= _gravity * Time.deltaTime;
         realDirection.y = _vSpeed;
 
-        if(!_climbing)
+        if(!_climbing || !_isOpeningDoor)
         {
             if (_isRunning)
 

@@ -7,6 +7,8 @@ public class WallEnterScript : MonoBehaviour, IInteractable
 {
     [SerializeField] Animator _animator;
 
+    public bool IsInteractable => true;
+
     // Start is called before the first frame update
     public string GetName()
     {

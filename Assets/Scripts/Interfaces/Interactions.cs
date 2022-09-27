@@ -30,6 +30,11 @@ public class Interactions : MonoBehaviour
         _movement.Climb();
     }
 
+    internal void WaitEnterDoorAnimationEnd()
+    {
+        _movement.OpenDoor();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,10 +54,13 @@ public class Interactions : MonoBehaviour
         {
             if (hit.collider.TryGetComponent<IInteractable>(out IInteractable interactableObject))
             {
-                _canva.gameObject.SetActive(true);
-                if(_actionButtonPressd == true)
+                if(interactableObject.IsInteractable)
                 {
-                    interactableObject.Use(this);
+                    _canva.gameObject.SetActive(true);
+                    if(_actionButtonPressd == true)
+                    {
+                        interactableObject.Use(this);
+                    }
                 }
             }
             else

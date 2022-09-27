@@ -20,6 +20,7 @@ public class UnblockInput : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.transform.parent.GetComponentInChildren<PlayerMouvement>().ClimbStop();
+        animator.transform.parent.GetComponentInChildren<PlayerMouvement>().OpenDoorStop();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
