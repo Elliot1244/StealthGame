@@ -14,6 +14,7 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] Camera _camera;
     [SerializeField] AnimationCurve _climbY;
     [SerializeField] AnimationCurve _climbZ;
+    //[SerializeField] GameObject _player;
     [SerializeField] int _isWalkingAnim;
     [SerializeField] float _speed;
     [SerializeField] float _gravity;
@@ -109,6 +110,7 @@ public class PlayerMouvement : MonoBehaviour
     void Start()
     {
         _isWalkingAnim = Animator.StringToHash("isWalking");
+        //_player.transform.position = new Vector3(16.82f, 0.04f, -6.29f);
     }
 
 

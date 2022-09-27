@@ -9,7 +9,6 @@ public class EnterMansionScript : MonoBehaviour, IInteractable
     [SerializeField] Animator _animator;
     [SerializeField] PlayableDirector _doorAnimator;
     [SerializeField] Canvas _canva;
-
     [SerializeField] UnityEvent _onUse;
     bool _isOpen;
 
@@ -28,13 +27,13 @@ public class EnterMansionScript : MonoBehaviour, IInteractable
             return;
         }
         _doorAnimator.Play();
-        _doorAnimator.stopped += _doorAnimator_stopped;
-        master.WaitEnterDoorAnimationEnd();
+        //_doorAnimator.stopped += _doorAnimator_stopped;
+        //master.WaitEnterDoorAnimationEnd();
         _isOpen = true;
     }
 
-    private void _doorAnimator_stopped(PlayableDirector obj)
+    /*private void _doorAnimator_stopped(PlayableDirector obj)
     {
         throw new System.NotImplementedException();
-    }
+    }*/
 }
