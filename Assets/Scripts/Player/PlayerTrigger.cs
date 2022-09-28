@@ -45,7 +45,7 @@ public class PlayerTrigger : MonoBehaviour
 
     IEnumerator ShutDownTV()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         Renderer _tv = _tv1.GetComponent<Renderer>();
         _screamerTrigger.SetActive(true);
         _tvNoise.Stop();
@@ -56,7 +56,7 @@ public class PlayerTrigger : MonoBehaviour
 
     IEnumerator DestroyCollider()
     {
-        yield return new WaitForSeconds(2.1f);
+        yield return new WaitForSeconds(3.1f);
         _destroyTvTrigger.SetActive(false);
     }
 }
