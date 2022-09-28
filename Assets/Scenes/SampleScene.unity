@@ -9601,8 +9601,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.1205698, y: 0.051103577, z: -0.0062151905, w: 0.9913691}
-  m_LocalPosition: {x: 9.993494, y: 3.65, z: 48.348984}
+  m_LocalRotation: {x: 0.10783314, y: 0.6744051, z: -0.10051644, w: 0.72349584}
+  m_LocalPosition: {x: 7.8394585, y: 3.65, z: 47.231956}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10953,6 +10953,7 @@ GameObject:
   - component: {fileID: 372104075}
   - component: {fileID: 372104076}
   - component: {fileID: 372104077}
+  - component: {fileID: 372104078}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -10968,7 +10969,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372104074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.83, y: 1.05, z: 51.23}
+  m_LocalPosition: {x: 10.83, y: 1.05, z: 47.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11007,6 +11008,26 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372104074}
   m_Enabled: 1
+--- !u!95 &372104078
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372104074}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &382740660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16335,7 +16356,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569268148}
-  m_LocalRotation: {x: -0.014396582, y: -0.9726729, z: 0.20802, w: -0.10211701}
+  m_LocalRotation: {x: 0.10488123, y: -0.8719067, z: 0.20927382, w: 0.4300967}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -27786,7 +27807,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999372585}
-  m_LocalRotation: {x: -0.010677688, y: -0.97958726, z: 0.17255042, w: -0.102572545}
+  m_LocalRotation: {x: 0.0891888, y: -0.8789331, z: 0.17746374, w: 0.43362272}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -30163,7 +30184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078217658}
   m_LocalRotation: {x: -0.007269341, y: 0.9752997, z: -0.0017591973, w: -0.22075891}
-  m_LocalPosition: {x: 9.993494, y: 3.65, z: 48.348984}
+  m_LocalPosition: {x: 7.8394585, y: 3.65, z: 47.231956}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -37967,7 +37988,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324578598}
-  m_LocalRotation: {x: -0.013438486, y: -0.97790635, z: 0.12107925, w: -0.1698778}
+  m_LocalRotation: {x: 0.07830145, y: -0.85358584, z: 0.13353477, w: 0.4974219}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -44391,7 +44412,8 @@ AudioSource:
   m_GameObject: {fileID: 1577983022}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1870297612436335052, guid: a447abd5124da244fb6046ecc662e39e,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: f046b4653b5e6d449ac6089bfb2bed3a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -62578,12 +62600,12 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 7983674026343421912, guid: 01f29a8b390d21148a6e463080dcbe48, type: 2}
     value: {fileID: 65024452826789759}
-  - key: {fileID: -8068803356080653847, guid: 01f29a8b390d21148a6e463080dcbe48, type: 2}
-    value: {fileID: 865535847}
   - key: {fileID: -1851359732063310729, guid: 01f29a8b390d21148a6e463080dcbe48, type: 2}
     value: {fileID: 5535196621587213096}
   - key: {fileID: 6529090328790936068, guid: 01f29a8b390d21148a6e463080dcbe48, type: 2}
     value: {fileID: 1577983024}
+  - key: {fileID: 4545444072305604334, guid: 01f29a8b390d21148a6e463080dcbe48, type: 2}
+    value: {fileID: 372104078}
   m_ExposedReferences:
     m_References: []
 --- !u!65 &65613244994855753
