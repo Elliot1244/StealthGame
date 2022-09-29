@@ -5,7 +5,7 @@ using UnityEngine;
 public class WitchDetection : MonoBehaviour
 {
     [SerializeField] Animator _animator;
-    [SerializeField] GameObject _player;
+    [SerializeField] Transform _player;
     [SerializeField] GameObject _witch;
     [SerializeField] float  _speed;
     [SerializeField] float _speedChase;
@@ -29,13 +29,14 @@ public class WitchDetection : MonoBehaviour
         {
             Debug.Log("Joueur sorti");
             _seePlayer = false;
-            //_animator.SetBool("isRunning", false);
             StartCoroutine("SawPlayer");
         }
     }
 
     private void Update()
     {
+        //Rotation
+        _witch.transform.LookAt(_player.GetComponent<Rigidbody>().position);
         //If witch sees player
         if (_playerLost == false)
         {                                                                                               
@@ -43,6 +44,7 @@ public class WitchDetection : MonoBehaviour
             Vector3 direction = _witch.transform.position - _player.transform.position;
             direction = direction.normalized;
             _witch.transform.position -= direction * Time.deltaTime * _speed;
+
             if (_seePlayer == true)
             {
                 //Witch towards player
