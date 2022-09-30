@@ -35,8 +35,12 @@ public class WitchDetection : MonoBehaviour
 
     private void Update()
     {
+        Debug.DrawRay(transform.position, transform.forward * 5, Color.red);
+
         //Rotation
-        _witch.transform.LookAt(_player.GetComponent<Rigidbody>().position);
+        _witch.transform.LookAt(_player);
+        _witch.transform.Rotate(0, 180, 0);
+
         //If witch sees player
         if (_playerLost == false)
         {                                                                                               
@@ -63,8 +67,6 @@ public class WitchDetection : MonoBehaviour
         }
     }
 
-
-   
 
     IEnumerator SawPlayer()
     {
