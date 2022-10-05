@@ -16916,6 +16916,8 @@ MonoBehaviour:
   _sprint: {fileID: 401668771626236044, guid: 5e71f485df517cf4a9c54547b9eba2fc, type: 3}
   _action: {fileID: -8728897778446292608, guid: 5e71f485df517cf4a9c54547b9eba2fc,
     type: 3}
+  _useObject: {fileID: -2645309626806317060, guid: 5e71f485df517cf4a9c54547b9eba2fc,
+    type: 3}
   _animator: {fileID: 5535196621587213096}
   _controller: {fileID: 372104076}
   _camera: {fileID: 330585545}
@@ -16994,7 +16996,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _playerLantern: {fileID: 646156894}
   _isWalkingAnim: 0
+  _isWalkingWithlantern: 0
   _speed: 3.5
   _gravity: 5
 --- !u!65 &532576777
@@ -17758,7 +17762,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.18, y: 0.43, z: 0.27}
+  m_Size: {x: 0.18, y: 0.58, z: 0.27}
   m_Center: {x: 0, y: -0.3, z: 0}
 --- !u!1001 &550027073
 PrefabInstance:
@@ -42424,7 +42428,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324578598}
-  m_LocalRotation: {x: 0.030185724, y: -0.9576894, z: 0.09204537, w: 0.271012}
+  m_LocalRotation: {x: 0.03018572, y: -0.95768946, z: 0.09204535, w: 0.27101198}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

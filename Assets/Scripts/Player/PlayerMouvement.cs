@@ -9,12 +9,15 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] InputActionReference _movement;
     [SerializeField] InputActionReference _sprint;
     [SerializeField] InputActionReference _action;
+    [SerializeField] InputActionReference _useObject;
     [SerializeField] Animator _animator;
     [SerializeField] CharacterController _controller;
     [SerializeField] Camera _camera;
     [SerializeField] AnimationCurve _climbY;
     [SerializeField] AnimationCurve _climbZ;
+    [SerializeField] GameObject _playerLantern;
     [SerializeField] int _isWalkingAnim;
+    [SerializeField] int _isWalkingWithlantern;
     [SerializeField] float _speed;
     [SerializeField] float _gravity;
     private float _vSpeed = 0;
@@ -22,8 +25,10 @@ public class PlayerMouvement : MonoBehaviour
     Vector3 _currentMovement;
     bool _movementPressed;
     bool _isRunning;
+    bool _lanternPicked;
     bool _isPicking;
-    //bool _useLantern;
+    bool _useLantern;
+    //bool _lanternActive = false;
 
     bool _climbing;
     bool _isOpeningDoor;
@@ -77,15 +82,13 @@ public class PlayerMouvement : MonoBehaviour
 
         _isPicking = true;
         _animator.SetTrigger("isPickingUp");
+        _lanternPicked = true;
     }
 
-    /*internal void UseLantern()
+    internal void UseLantern()
     {
-        if (_useLantern) return;
-
         _useLantern = true;
-        _animator.SetTrigger("useLantern");
-    }*/
+    }
 
     internal void OpenDoorStop()
     {
@@ -102,6 +105,9 @@ public class PlayerMouvement : MonoBehaviour
         _sprint.action.started += SprintStarted;
         _sprint.action.performed += SprintUpdate;
         _sprint.action.canceled += SprintCanceled;
+
+        //Object
+        _useObject.action.performed += UseObject;
     }
 
 
@@ -121,9 +127,35 @@ public class PlayerMouvement : MonoBehaviour
         _isRunning = true;
     }
 
+    private void UseObject(InputAction.CallbackContext obj)
+    {
+        if (_lanternPicked == true)
+        {
+            if (_useLantern == false)
+            {
+                _animator.SetTrigger("useLantern");
+                _playerLantern.SetActive(true);
+                Debug.Log("Use lantern");
+                _useLantern = true;
+            }
+            else
+            {
+                _animator.SetTrigger("unusedLantern");
+                _playerLantern.SetActive(false);
+                _useLantern = false;
+                Debug.Log("Unused Lantern");
+            }
+        }
+        else
+        {
+            Debug.Log("No object to use");
+        }
+    }
+
     void Start()
     {
         _isWalkingAnim = Animator.StringToHash("isWalking");
+        _isWalkingWithlantern = Animator.StringToHash("WalkWithLantern");
     }
 
 
@@ -155,6 +187,17 @@ public class PlayerMouvement : MonoBehaviour
         else
         {
             _animator.SetBool(_isWalkingAnim, false);
+        }
+
+
+        //If player move with lantern
+        if(_movementPressed && _useLantern == true)
+        {
+            _animator.SetBool(_isWalkingWithlantern, true);
+        }
+        else
+        {
+            _animator.SetBool(_isWalkingWithlantern, false);
         }
 
         // Camera

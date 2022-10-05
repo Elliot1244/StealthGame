@@ -40,10 +40,10 @@ public class Interactions : MonoBehaviour
         _movement.PickUp();
     }
 
-    /*internal void WaitUseLanternAnimationEnd()
+    internal void UseLanter()
     {
         _movement.UseLantern();
-    }*/
+    }
 
     // Start is called before the first frame update
     void Start()
