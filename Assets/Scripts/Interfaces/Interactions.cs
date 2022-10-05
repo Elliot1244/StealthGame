@@ -8,8 +8,10 @@ using System;
 public class Interactions : MonoBehaviour
 {
     [SerializeField] Canvas _canva;
+    [SerializeField] Image _lightRemaining;
     [SerializeField] InputActionReference _action;
     [SerializeField] PlayerMouvement _movement;
+    [SerializeField] Image _inputImage;
     bool _actionButtonPressd = false;
 
     private void Awake()
@@ -48,7 +50,7 @@ public class Interactions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _canva.gameObject.SetActive(false);
+        _canva.gameObject.SetActive(true);
     }
 
     private void ActionStarted(InputAction.CallbackContext obj)
@@ -66,8 +68,10 @@ public class Interactions : MonoBehaviour
             {
                 if(interactableObject.IsInteractable)
                 {
-                    _canva.gameObject.SetActive(true);
-                    if(_actionButtonPressd == true)
+                    //_canva.gameObject.SetActive(true);
+                    _inputImage.gameObject.SetActive(true);
+                    //_lightRemaining.gameObject.SetActive(false);
+                    if (_actionButtonPressd == true)
                     {
                         interactableObject.Use(this);
                     }
@@ -75,12 +79,18 @@ public class Interactions : MonoBehaviour
             }
             else
             {
-                _canva.gameObject.SetActive(false);
+                _inputImage.gameObject.SetActive(false);
+                //_canva.gameObject.SetActive(true);
+                //_lightRemaining.gameObject.SetActive(false);
             }
         }
         else
         {
-            _canva.gameObject.SetActive(false);
+            //_canva.gameObject.SetActive(false);
+            _inputImage.gameObject.SetActive(false);
         }
+
+        //_lightRemaining.gameObject.SetActive(false);
+        //_inputImage.gameObject.SetActive(false);
     }
 }

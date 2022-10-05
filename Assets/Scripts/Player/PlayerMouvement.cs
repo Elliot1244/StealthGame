@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 public class PlayerMouvement : MonoBehaviour
 {
     [SerializeField] float _waitBeforeFalling = 15f;
@@ -16,6 +17,9 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] AnimationCurve _climbY;
     [SerializeField] AnimationCurve _climbZ;
     [SerializeField] GameObject _playerLantern;
+    [SerializeField] Canvas _canva;
+    [SerializeField] Image _inputImage;
+    [SerializeField] Image _lightRemaining;
     [SerializeField] int _isWalkingAnim;
     [SerializeField] int _isWalkingWithlantern;
     [SerializeField] float _speed;
@@ -135,7 +139,9 @@ public class PlayerMouvement : MonoBehaviour
             {
                 _animator.SetTrigger("useLantern");
                 _playerLantern.SetActive(true);
-                Debug.Log("Use lantern");
+                //_canva.gameObject.SetActive(true);
+                //_inputImage.gameObject.SetActive(false);
+                _lightRemaining.gameObject.SetActive(true);
                 _useLantern = true;
             }
             else
@@ -143,7 +149,8 @@ public class PlayerMouvement : MonoBehaviour
                 _animator.SetTrigger("unusedLantern");
                 _playerLantern.SetActive(false);
                 _useLantern = false;
-                Debug.Log("Unused Lantern");
+                _lightRemaining.gameObject.SetActive(false);
+                //_canva.gameObject.SetActive(false);
             }
         }
         else
