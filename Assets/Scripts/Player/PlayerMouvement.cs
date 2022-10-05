@@ -14,16 +14,16 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] Camera _camera;
     [SerializeField] AnimationCurve _climbY;
     [SerializeField] AnimationCurve _climbZ;
-    //[SerializeField] GameObject _player;
     [SerializeField] int _isWalkingAnim;
     [SerializeField] float _speed;
     [SerializeField] float _gravity;
-    //[SerializeField] Transform _root;
     private float _vSpeed = 0;
 
     Vector3 _currentMovement;
     bool _movementPressed;
     bool _isRunning;
+    bool _isPicking;
+    //bool _useLantern;
 
     bool _climbing;
     bool _isOpeningDoor;
@@ -71,6 +71,22 @@ public class PlayerMouvement : MonoBehaviour
         _animator.SetTrigger("canOpenDoor");
     }
 
+    internal void PickUp()
+    {
+        if(_isPicking) return;
+
+        _isPicking = true;
+        _animator.SetTrigger("isPickingUp");
+    }
+
+    /*internal void UseLantern()
+    {
+        if (_useLantern) return;
+
+        _useLantern = true;
+        _animator.SetTrigger("useLantern");
+    }*/
+
     internal void OpenDoorStop()
     {
         _isOpeningDoor = false;
@@ -86,8 +102,6 @@ public class PlayerMouvement : MonoBehaviour
         _sprint.action.started += SprintStarted;
         _sprint.action.performed += SprintUpdate;
         _sprint.action.canceled += SprintCanceled;
-
-
     }
 
 
@@ -110,7 +124,6 @@ public class PlayerMouvement : MonoBehaviour
     void Start()
     {
         _isWalkingAnim = Animator.StringToHash("isWalking");
-        //_player.transform.position = new Vector3(16.82f, 0.04f, -6.29f);
     }
 
 
@@ -154,8 +167,6 @@ public class PlayerMouvement : MonoBehaviour
             _controller.transform.rotation = Quaternion.Euler(0, _controller.transform.rotation.eulerAngles.y, 0);
         }
        
-
-
         // Gravity
         _vSpeed -= _gravity * Time.deltaTime;
         realDirection.y = _vSpeed;

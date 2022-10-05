@@ -35,6 +35,16 @@ public class Interactions : MonoBehaviour
         _movement.OpenDoor();
     }
 
+    internal void WaitPickUpAnimationEnd()
+    {
+        _movement.PickUp();
+    }
+
+    /*internal void WaitUseLanternAnimationEnd()
+    {
+        _movement.UseLantern();
+    }*/
+
     // Start is called before the first frame update
     void Start()
     {

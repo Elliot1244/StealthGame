@@ -12,7 +12,7 @@ public class EnterMansionScript : MonoBehaviour, IInteractable
     [SerializeField] UnityEvent _onUse;
     bool _isOpen;
 
-    public bool IsInteractable => _isOpen==false;
+    public bool IsInteractable => _isOpen == false;
 
     public string GetName()
     {
