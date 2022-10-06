@@ -95,6 +95,11 @@ public class PlayerMouvement : MonoBehaviour
         _lanternPicked = true;
     }
 
+    internal void HavePile()
+    {
+        _stockPile++;
+    }
+
     internal void UseLantern()
     {
         _useLantern = true;

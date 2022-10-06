@@ -47,6 +47,11 @@ public class Interactions : MonoBehaviour
         _movement.UseLantern();
     }
 
+    internal void HavePile()
+    {
+        _movement.HavePile();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

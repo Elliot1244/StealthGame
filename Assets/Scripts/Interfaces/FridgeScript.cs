@@ -23,9 +23,6 @@ public class FridgeScript : MonoBehaviour, IInteractable
     {
         if (_isOpen == true)
         {
-            /*_animator.SetTrigger("_isOpen");
-            master.WaitEnterDoorAnimationEnd();*/
-
             _player.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
             _player.transform.position = new Vector3(13.037f, 1.06f, 67.049f);
             Debug.Log("Joueur à l'intérieur");
@@ -36,9 +33,6 @@ public class FridgeScript : MonoBehaviour, IInteractable
         }
         if(_isOpen == false)
         {
-            //_animator.SetTrigger("_isOpen");
-            //master.WaitEnterDoorAnimationEnd();
-
             _player.transform.localScale = new Vector3(1, 1, 1);
             _player.transform.position = new Vector3(13.144f, 1.06f, 66.016f);
             Debug.Log("Joueur dehors");
@@ -48,17 +42,5 @@ public class FridgeScript : MonoBehaviour, IInteractable
             return;
         }
     }
-
-    /*IEnumerator ChangeCamKitchen()
-    {
-        yield return new WaitForSeconds(1f);
-        
-    }*/
-
-    /*IEnumerator BackToPlayerCam()
-    {
-        yield return new WaitForSeconds(1f);
-        
-    }*/
 
 }
