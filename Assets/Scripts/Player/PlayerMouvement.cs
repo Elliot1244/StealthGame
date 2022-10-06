@@ -17,13 +17,18 @@ public class PlayerMouvement : MonoBehaviour
     [SerializeField] AnimationCurve _climbY;
     [SerializeField] AnimationCurve _climbZ;
     [SerializeField] GameObject _playerLantern;
+    [SerializeField] GameObject _lanternLight;
     [SerializeField] Canvas _canva;
     [SerializeField] Image _inputImage;
-    [SerializeField] Image _lightRemaining;
+    [SerializeField] Slider _lightSlider;
+    [SerializeField] float  _light;
+    [SerializeField] float _maxLight;
     [SerializeField] int _isWalkingAnim;
     [SerializeField] int _isWalkingWithlantern;
     [SerializeField] float _speed;
     [SerializeField] float _gravity;
+    [SerializeField] int  _stockPile;
+    [SerializeField] int _RefuelLantern;
     private float _vSpeed = 0;
 
     Vector3 _currentMovement;
@@ -36,6 +41,7 @@ public class PlayerMouvement : MonoBehaviour
 
     bool _climbing;
     bool _isOpeningDoor;
+    bool _isRefuling;
 
     private void Reset()
     {
@@ -139,18 +145,17 @@ public class PlayerMouvement : MonoBehaviour
             {
                 _animator.SetTrigger("useLantern");
                 _playerLantern.SetActive(true);
-                //_canva.gameObject.SetActive(true);
-                //_inputImage.gameObject.SetActive(false);
-                _lightRemaining.gameObject.SetActive(true);
+                _lightSlider.gameObject.SetActive(true);
                 _useLantern = true;
+                StartCoroutine(LightDecrease());
             }
             else
             {
+                StopCoroutine(LightDecrease());
                 _animator.SetTrigger("unusedLantern");
                 _playerLantern.SetActive(false);
                 _useLantern = false;
-                _lightRemaining.gameObject.SetActive(false);
-                //_canva.gameObject.SetActive(false);
+                _lightSlider.gameObject.SetActive(false);
             }
         }
         else
@@ -163,13 +168,59 @@ public class PlayerMouvement : MonoBehaviour
     {
         _isWalkingAnim = Animator.StringToHash("isWalking");
         _isWalkingWithlantern = Animator.StringToHash("WalkWithLantern");
-    }
+        _RefuelLantern = Animator.StringToHash("RefuelLantern");
 
+        
+    }
 
     void Update()
     {
         _animator.SetBool("isRunning", _isRunning);
         Movement();
+
+        //Lantern Management
+        if (_useLantern == true)
+        {
+            if (_lightSlider.value <= 0 && _stockPile > 0 && !_isRefuling)
+            {
+                StartCoroutine(RefuelRoutine());
+                IEnumerator RefuelRoutine()
+                {
+                    _isRefuling = true;
+                    _lightSlider.gameObject.SetActive(false);
+                    _lanternLight.gameObject.SetActive(false);
+
+                    //Animation
+                    _animator.SetBool(_RefuelLantern, true);
+                    yield return new WaitForSeconds(1f);
+
+                    _lightSlider.value = _maxLight;
+                    _lightSlider.gameObject.SetActive(true);
+                    _lanternLight.gameObject.SetActive(true);
+                    _stockPile--;
+                    Debug.Log(_lightSlider.value);
+                    _isRefuling = false;
+                    _light = 100;
+                    StartCoroutine(LightDecrease());
+                }
+            }
+            else if(_lightSlider.value <= 0 && _stockPile <= 0)
+            {
+                _lightSlider.gameObject.SetActive(false);
+                _lanternLight.gameObject.SetActive(false);
+            }
+        } 
+    }
+
+    IEnumerator LightDecrease()
+    {
+        while (_lightSlider.value > 0)
+        {
+            _light -= 5f;
+            _lightSlider.value = _light;
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield break;
     }
 
     private void StartMovement(InputAction.CallbackContext obj)
