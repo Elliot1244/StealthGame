@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WitchDetection : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class WitchDetection : MonoBehaviour
     private void Awake()
     {
         _state = WitchState.IDLE;
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,6 +63,11 @@ public class WitchDetection : MonoBehaviour
         _playerDetected = null;
         Debug.Log("joueur perdu");
         yield break;
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void FixedUpdate()

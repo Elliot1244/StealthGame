@@ -10,6 +10,7 @@ public class LanternScript : MonoBehaviour, IInteractable
     [SerializeField] GameObject _lantern;
     [SerializeField] GameObject _playerLantern;
     [SerializeField] InputActionReference _useObject;
+    [SerializeField] Item _itemConf;
 
     bool _isPicking;
     bool _lanternPicked;
@@ -31,5 +32,7 @@ public class LanternScript : MonoBehaviour, IInteractable
         master.WaitPickUpAnimationEnd();
         Destroy(_lantern);
         _lanternPicked = true;
+
+        //master.Inventory.Add(_itemConf);
     }
 }
