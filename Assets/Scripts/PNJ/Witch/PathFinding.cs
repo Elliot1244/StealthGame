@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class PathFinding : MonoBehaviour
 {
     [SerializeField] NavMeshAgent _agent;
-    //[SerializeField] Transform _firstPoint;
     [SerializeField] Transform[] _points;
+    [SerializeField] Animator _animator;
     [SerializeField] int _speed;
     int _currentPoint;
     Vector3 _targetDirection;
@@ -19,25 +19,22 @@ public class PathFinding : MonoBehaviour
         _currentPoint = 0;
         _agent = GetComponent<NavMeshAgent>();
         UpdateDestination();
+        _animator.SetBool("isWalking", true);
     }
 
     private void Update()
     {
-        /*if(_agent.transform.position != _points[_currentPoint].position)
-        {
-            _agent.SetDestination(_points[_currentPoint].position);
-        }
-        else
-        {
-            _currentPoint = (_currentPoint + 1) % _points.Length;
-        }*/
-        var agent = _agent.transform.position;
-        agent.y = 0;
+        var agent = _agent.transform.position; 
+        agent.y = 0;                             //On ignore la comparaison en y
+
         var t = _targetDirection;
-        t.y = 0;
-        _remainingDistance = Vector3.Distance(agent, t);
+        t.y = 0;                                //On ignore la comparaison en y
+
+
+        _remainingDistance = Vector3.Distance(agent, t); //la distance restante (_remainingDistance) est égale à la distance entre la position du navmesh et le point où aller.
         if (_remainingDistance < 1)
         {
+            
             IncremanteCurrentPoint();
             UpdateDestination();
         }
