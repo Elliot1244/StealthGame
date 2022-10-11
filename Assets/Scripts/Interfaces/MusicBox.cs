@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
+using UnityEngine.InputSystem;
 
 public class MusicBox : MonoBehaviour, IInteractable
 {
@@ -17,13 +19,23 @@ public class MusicBox : MonoBehaviour, IInteractable
     int _activeHandle;
     int _activeDool;
 
+
+    //Vibration
+    PlayerIndex playerIndex;
+    GamePadState state;
+    GamePadState prevState;
+
     private void Start()
     {
         _activeHandle = Animator.StringToHash("isInactive");
         _activeDool = Animator.StringToHash("isInactive");
         _yokai.SetActive(false);
+    }
 
-
+    private void Update()
+    {
+            GamePad.SetVibration(playerIndex, 0.1f, 0.1f);
+            //Handheld.Vibrate();
     }
 
     public bool IsInteractable => _isInteracted == false;
@@ -32,6 +44,7 @@ public class MusicBox : MonoBehaviour, IInteractable
     {
         return "";
     }
+
 
     public void Use(Interactions master)
     {
@@ -46,9 +59,12 @@ public class MusicBox : MonoBehaviour, IInteractable
             master.WaitMusicBoxInteractionEnd();
             _isInteracted = true;
             StartCoroutine(BackToPlayerCam());
+            Gamepad.current.SetMotorSpeeds(0.25f, 0.75f);
+            _mirror.SetActive(false);
+            _brokenMirror.SetActive(true);
             _yokai.SetActive(true);
-            /*_mirror.SetActive(false);
-            _brokenMirror.SetActive(true);*/
+            
+
 
         }
         else
