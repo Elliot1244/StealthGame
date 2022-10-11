@@ -37,8 +37,7 @@ public class MusicBox : MonoBehaviour, IInteractable
 
     private void Update()
     {
-            GamePad.SetVibration(playerIndex, 0.1f, 0.1f);
-            //Handheld.Vibrate();
+      
     }
 
     public bool IsInteractable => _isInteracted == false;
