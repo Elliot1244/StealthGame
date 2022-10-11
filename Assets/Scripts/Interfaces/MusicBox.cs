@@ -11,6 +11,7 @@ public class MusicBox : MonoBehaviour, IInteractable
     [SerializeField] Camera _sceneCam;
     [SerializeField] GameObject _mirror;
     [SerializeField] GameObject _brokenMirror;
+    [SerializeField] GameObject _yokai;
 
     bool _isInteracted = false;
     int _activeHandle;
@@ -20,8 +21,9 @@ public class MusicBox : MonoBehaviour, IInteractable
     {
         _activeHandle = Animator.StringToHash("isInactive");
         _activeDool = Animator.StringToHash("isInactive");
-        
-        
+        _yokai.SetActive(false);
+
+
     }
 
     public bool IsInteractable => _isInteracted == false;
@@ -44,7 +46,7 @@ public class MusicBox : MonoBehaviour, IInteractable
             master.WaitMusicBoxInteractionEnd();
             _isInteracted = true;
             StartCoroutine(BackToPlayerCam());
-
+            _yokai.SetActive(true);
             /*_mirror.SetActive(false);
             _brokenMirror.SetActive(true);*/
 
