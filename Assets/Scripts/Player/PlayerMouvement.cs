@@ -228,7 +228,7 @@ public class PlayerMouvement : MonoBehaviour
     {
         while (_lightSlider.value > 0)
         {
-            _light -= 5f;
+            _light -= 0.5f;
             _lightSlider.value = _light;
             yield return new WaitForSeconds(0.1f);
         }

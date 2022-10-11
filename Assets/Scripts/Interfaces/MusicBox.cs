@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
+using UnityEngine.Playables;
 
 public class MusicBox : MonoBehaviour, IInteractable
 {
@@ -14,6 +16,7 @@ public class MusicBox : MonoBehaviour, IInteractable
     [SerializeField] GameObject _mirror;
     [SerializeField] GameObject _brokenMirror;
     [SerializeField] GameObject _yokai;
+    [SerializeField] PlayableDirector _atticTimeline;
 
     bool _isInteracted = false;
     int _activeHandle;
@@ -58,14 +61,8 @@ public class MusicBox : MonoBehaviour, IInteractable
             Debug.Log("Cinématique à jouer");
             master.WaitMusicBoxInteractionEnd();
             _isInteracted = true;
+            //_yokai.SetActive(true);
             StartCoroutine(BackToPlayerCam());
-            Gamepad.current.SetMotorSpeeds(0.25f, 0.75f);
-            _mirror.SetActive(false);
-            _brokenMirror.SetActive(true);
-            _yokai.SetActive(true);
-            
-
-
         }
         else
         {
@@ -75,11 +72,25 @@ public class MusicBox : MonoBehaviour, IInteractable
         
     }
 
+    private void _atticTimeline_stopped(PlayableDirector obj)
+    {
+      
+    }
+
     IEnumerator BackToPlayerCam()
     {
         yield return new WaitForSeconds(2);
         _playerCam.gameObject.SetActive(true);
         _sceneCam.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1.5f);
+        _atticTimeline.Play();
+        Gamepad.current.SetMotorSpeeds(0.25f, 0.75f);
+        _mirror.SetActive(false);
+        _brokenMirror.SetActive(true);
+        _yokai.SetActive(true);
+        _atticTimeline.stopped += _atticTimeline_stopped;
+        _yokai.SetActive(true);
+
         yield break;
     }
 
