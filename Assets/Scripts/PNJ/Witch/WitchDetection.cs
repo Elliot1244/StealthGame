@@ -65,7 +65,6 @@ public class WitchDetection : MonoBehaviour
     IEnumerator SawPlayer()
     {
         yield return new WaitForSeconds(5);
-        //_state = WitchState.IDLE;
         _playerDetected = null;
         Debug.Log("joueur perdu");
         _state = WitchState.PATROL;

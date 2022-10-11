@@ -13,15 +13,11 @@ public class PlayerTrigger : MonoBehaviour
     [SerializeField] GameObject _screamerTrigger;
     [SerializeField] GameObject _destroyTvTrigger;
 
-    // Start is called before the first frame update
     void Start()
     {
         _screamerTrigger.SetActive(false);
     }
 
-
-
-    // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.GetComponent<PlayerMouvement>() != null)

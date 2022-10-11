@@ -37,6 +37,11 @@ public class Interactions : MonoBehaviour
         _movement.OpenDoor();
     }
 
+    internal void WaitMusicBoxInteractionEnd()
+    {
+        _movement.TriggerMusicBox();
+    }
+
     internal void WaitPickUpAnimationEnd()
     {
         _movement.PickUp();

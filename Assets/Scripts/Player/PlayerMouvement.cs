@@ -42,6 +42,7 @@ public class PlayerMouvement : MonoBehaviour
     bool _climbing;
     bool _isOpeningDoor;
     bool _isRefuling;
+    bool _isTriggeringMusicBox;
 
     private void Reset()
     {
@@ -82,8 +83,16 @@ public class PlayerMouvement : MonoBehaviour
     {
         if(_isOpeningDoor) return;
 
-        _isOpeningDoor = true;
+        _isOpeningDoor = false;
         _animator.SetTrigger("canOpenDoor");
+    }
+
+    internal void TriggerMusicBox()
+    {
+        if(_isTriggeringMusicBox) return;
+
+        _isTriggeringMusicBox = false;
+        _animator.SetTrigger("PickObject");
     }
 
     internal void PickUp()
@@ -174,8 +183,6 @@ public class PlayerMouvement : MonoBehaviour
         _isWalkingAnim = Animator.StringToHash("isWalking");
         _isWalkingWithlantern = Animator.StringToHash("WalkWithLantern");
         _RefuelLantern = Animator.StringToHash("RefuelLantern");
-
-        
     }
 
     void Update()
@@ -266,7 +273,7 @@ public class PlayerMouvement : MonoBehaviour
         // Camera
         var realDirection = new Vector3(_currentMovement.x, 0, _currentMovement.y);
         realDirection = _camera.transform.TransformDirection(realDirection);
-        if(!_climbing || _isOpeningDoor)
+        if(!_climbing || !_isOpeningDoor)
         {
             // Rotation
             _controller.transform.LookAt(_controller.transform.position + realDirection);
