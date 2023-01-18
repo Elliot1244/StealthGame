@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using UnityEngine.Playables;
@@ -24,9 +23,9 @@ public class MusicBox : MonoBehaviour, IInteractable
 
 
     //Vibration
-    PlayerIndex playerIndex;
-    GamePadState state;
-    GamePadState prevState;
+    // PlayerIndex playerIndex;
+    // GamePadState state;
+    // GamePadState prevState;
 
     private void Start()
     {
@@ -83,7 +82,7 @@ public class MusicBox : MonoBehaviour, IInteractable
         _sceneCam.gameObject.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         _atticTimeline.Play();
-        Gamepad.current.SetMotorSpeeds(0.25f, 0.75f);
+        //Gamepad.current.SetMotorSpeeds(0.25f, 0.75f);
         _mirror.SetActive(false);
         _brokenMirror.SetActive(true);
         _yokai.SetActive(true);
